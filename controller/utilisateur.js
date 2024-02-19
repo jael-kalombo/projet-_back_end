@@ -1,18 +1,22 @@
+const {utilisateur} = require('../model/utilisateur')
 
-const { utilisateur } = require ("../model/utilisateur")
-const Client = require("../model")
 
-const ajouteUtilisateur = async(req,res)=>{
-    try{
-        let utilisateur = new utilisateur (req.body.noms,req.body.adresse,req.body.telephone);
+const getUtilisateur =(req,res)=>{
+    res.send("bienvenue");
+};
 
-        let result = await Client.bd().collection("utilisateur").insertone(utilisateur);
-
-        res.status(200).json(result);
-    }catch (error){
-        console.log(error);
-        res.status(500).json(error)
-    }
+const getOne = (req,res)=>{
+    const id = req.params.id;
+    const user = utilisateur.filter(utilisateur=>utilisateur.id == id)
+    res.send (user)
+}
+const postUser = (req,res)=>{
+    const post = req.body
+    post.id = utilisateur.length + 1
+    post.usermane = 0;
+    utilisateur.push(req.body)
+    res.json(utilisateur)
+    
 }
 
-module.exports ={ajouteUtilisateur}
+module.exports={getUtilisateur,getOne,postUser}

@@ -1,12 +1,10 @@
 const express = require('express');
-const { connecter } = require('./bd/connect');
+//const router=require(express.Router())
 const app = express();
-
-app.get("/", (req, res) => {
-    res.send("bienvenue")
-})
-
-connecter
+app.use(express.json())
+app.use("/users", require('./route/utilisateur.js'));
+app.use("/postUser",require('./route/utilisateur.js'))
+app.use("/post",require('./route/postsRoutes.js'));
 
 app.listen(3000, () => {
     console.log("bienvenue sur le port 3000")
