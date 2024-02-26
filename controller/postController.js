@@ -6,7 +6,7 @@ const sauvegarder = (req, res) => {
     post.retweet = 0
     posts.push(req.body)
     res.json(posts)
-    post
+    
 
 };
 
